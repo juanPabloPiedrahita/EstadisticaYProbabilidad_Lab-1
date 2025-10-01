@@ -121,8 +121,25 @@ plt.ylabel("Ingresos Mill($)", fontsize=12)
 plt.savefig(f"{output_dir}/Punto_4.png")
 plt.close()
 
-# 5. Variabilidad edad Fem vs Masc
-var_fem = df[df['sexo_label']=="Femenino"]['edad'].var()
-var_masc = df[df['sexo_label']=="Masculino"]['edad'].var()
-print(f"Punto 5 - Varianza edad Femenino: {var_fem:.2f}")
-print(f"Punto 5 - Varianza edad Masculino: {var_masc:.2f}")
+# Punto 5 - Variabilidad de la edad por sexo
+fem = df[df['sexo_label']=="Femenino"]['edad']
+masc = df[df['sexo_label']=="Masculino"]['edad']
+
+var_fem = fem.var()
+var_masc = masc.var()
+
+std_fem = fem.std()
+std_masc = masc.std()
+
+print("Punto 5 - Variabilidad edad")
+print(f"Femenino -> Varianza: {var_fem:.2f}, Desviación Estándar: {std_fem:.2f}")
+print(f"Masculino -> Varianza: {var_masc:.2f}, Desviación Estándar: {std_masc:.2f}")
+
+#Grafica para el punto 5:
+plt.figure(figsize=(7,5))
+sns.boxplot(x='sexo_label', y='edad', data=df, palette="pastel")
+plt.title("Distribución de la edad según el sexo")
+plt.xlabel("Sexo")
+plt.ylabel("Edad")
+plt.savefig(f"{output_dir}/Punto_5.png")
+plt.close()
